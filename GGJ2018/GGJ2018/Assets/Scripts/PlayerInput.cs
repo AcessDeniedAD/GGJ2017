@@ -12,6 +12,7 @@ public class PlayerInput : MonoBehaviour {
 
 	public float speed;
 	private float step;
+	private bool coroutineStarted;
 
 	// Use this for initialization
 	void Start () {
@@ -35,7 +36,7 @@ public class PlayerInput : MonoBehaviour {
 			(Input.GetKeyDown(KeyCode.LeftArrow) && controllerIndex == GamePad.Index.One) ||
 			(Input.GetKeyDown(KeyCode.D) && controllerIndex == GamePad.Index.Two)) 
 		{
-			if (position > -1) {
+			if (position > -1 && coroutineStarted == false) {
 				float step = speed * Time.deltaTime;
 				float newX = gameObject.transform.position.x - Move;
 				Vector3 NewPosition = new Vector3 (newX, gameObject.transform.position.y, gameObject.transform.position.z);
@@ -49,7 +50,7 @@ public class PlayerInput : MonoBehaviour {
 			(Input.GetKeyDown(KeyCode.RightArrow) && controllerIndex == GamePad.Index.One) ||
 			(Input.GetKeyDown(KeyCode.Q) && controllerIndex == GamePad.Index.Two)) 
 		{
-			if (position < 1) {
+			if (position < 1 && coroutineStarted == false) {
 				float step = speed * Time.deltaTime;
 				float newX = gameObject.transform.position.x + Move;
 				Vector3 NewPosition = new Vector3 (newX, gameObject.transform.position.y, gameObject.transform.position.z);
@@ -68,11 +69,13 @@ public class PlayerInput : MonoBehaviour {
 
 	IEnumerator MoveCoroutine(Vector3 NewPosition, float step){
 		//Debug.Log("Before While");
+		coroutineStarted = true;
 		while (gameObject.transform.position != NewPosition){
 			//Debug.Log("In While " +NewPosition + " "+ step+ " " + gameObject.transform.position );
 			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, NewPosition, step);
 			yield return 0;
 		}
+		coroutineStarted = false;
 		yield return 0;
 
 	}
