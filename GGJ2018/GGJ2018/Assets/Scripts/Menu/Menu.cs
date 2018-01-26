@@ -16,6 +16,7 @@ public class Menu : MonoBehaviour {
 	}
 
     public void ChangeScene(string sceneName) {
+        Debug.Log("Send nude !!!!");
         SceneManager.LoadScene(sceneName);
     }
 }

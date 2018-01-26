@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GamepadInput;
 
-public class Input2 : MonoBehaviour {
+public class MonsterSpeed : MonoBehaviour {
 
+    public float speed = 0.0f; 
 	// Use this for initialization
 	void Start () {
 		
@@ -12,8 +12,6 @@ public class Input2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (GamePad.GetButtonDown(GamePad.Button.A, GamePad.Index.One)) {
-            Debug.Log("okokokokoko");
-        }
+        gameObject.transform.position += Vector3.forward * speed * Time.deltaTime;
 	}
 }
