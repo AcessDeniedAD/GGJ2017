@@ -6,7 +6,12 @@ using GamepadInput;
 public class PlayerInput : MonoBehaviour {
 
 	public int playerId ;
+	public float Move;
 	private GamePad.Index controllerIndex;
+	private int position = 0;
+
+	public float speed;
+	private float step;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +20,7 @@ public class PlayerInput : MonoBehaviour {
 		} else {
 			controllerIndex = GamePad.Index.Two;
 		}
+
 
 	}
 	
@@ -29,15 +35,27 @@ public class PlayerInput : MonoBehaviour {
 			(Input.GetKeyDown(KeyCode.LeftArrow) && controllerIndex == GamePad.Index.One) ||
 			(Input.GetKeyDown(KeyCode.D) && controllerIndex == GamePad.Index.Two)) 
 		{
-			MoveRight ();
+			if (position > -1) {
+				float step = speed * Time.deltaTime;
+				float newX = gameObject.transform.position.x - Move;
+				Vector3 NewPosition = new Vector3 (newX, gameObject.transform.position.y, gameObject.transform.position.z);
+				StartCoroutine (MoveCoroutine (NewPosition, step));
+				position -= 1;
+			}
 		}
 
 		// Move Right action
-		if (GamePad.GetButtonDown(GamePad.Button.B, controllerIndex) || 
+		else if (GamePad.GetButtonDown(GamePad.Button.B, controllerIndex) || 
 			(Input.GetKeyDown(KeyCode.RightArrow) && controllerIndex == GamePad.Index.One) ||
 			(Input.GetKeyDown(KeyCode.Q) && controllerIndex == GamePad.Index.Two)) 
 		{
-			MoveLeft();
+			if (position < 1) {
+				float step = speed * Time.deltaTime;
+				float newX = gameObject.transform.position.x + Move;
+				Vector3 NewPosition = new Vector3 (newX, gameObject.transform.position.y, gameObject.transform.position.z);
+				StartCoroutine (MoveCoroutine (NewPosition, step));
+				position += 1;
+			}
 		}
 
 		// Action
@@ -48,15 +66,17 @@ public class PlayerInput : MonoBehaviour {
 			
 	}
 
+	IEnumerator MoveCoroutine(Vector3 NewPosition, float step){
+		//Debug.Log("Before While");
+		while (gameObject.transform.position != NewPosition){
+			//Debug.Log("In While " +NewPosition + " "+ step+ " " + gameObject.transform.position );
+			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, NewPosition, step);
+			yield return 0;
+		}
+		yield return 0;
 
-	public void MoveRight(){
-		Debug.Log("Player move right"+gameObject.name);
 	}
-
-	public void MoveLeft(){
-		Debug.Log("Player move Left"+gameObject.name);
-	}
-
+		
 	public void Action(){
 		Debug.Log("Action"+gameObject.name);
 	}
