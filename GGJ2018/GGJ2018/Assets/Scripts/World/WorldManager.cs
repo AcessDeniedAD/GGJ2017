@@ -30,7 +30,7 @@ public class WorldManager : MonoBehaviour {
                 floors[i].transform.position += -Vector3.forward * speed * Time.deltaTime;
                 if (floors[i].transform.position.z < -400)
                 {
-                    int randomInt = Random.Range(0, TotalFLoors);
+                    
                     Transform actualFloor = floors[i];
                     Destroy(actualFloor.gameObject);
                     floors.Remove(actualFloor);
@@ -43,8 +43,11 @@ public class WorldManager : MonoBehaviour {
     }
 
     public void InitFloor() {
+        int randomInt = Random.Range(1, TotalFLoors - 1);
         Transform lastFloor = floors[floors.Count - 1];
-        GameObject newFloor = Resources.Load("Floor") as GameObject;
+        Debug.Log(randomInt);
+        Debug.Break();
+        GameObject newFloor = Resources.Load("Floor" + randomInt) as GameObject;
         MeshRenderer lastFloorMesh = lastFloor.GetComponent<MeshRenderer>();
         Vector3 newPosition = lastFloor.transform.position + new Vector3(0, 0, lastFloorMesh.bounds.size.z);
         GameObject newFloorInstantiate = Instantiate(newFloor, newPosition, Quaternion.identity) as GameObject;
