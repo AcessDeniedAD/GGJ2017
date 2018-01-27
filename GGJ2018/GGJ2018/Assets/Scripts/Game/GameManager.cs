@@ -6,14 +6,16 @@ public class GameManager : MonoBehaviour {
 
 
     public static GameManager singleton;
-
+    public string GameState = "begin";
     public delegate void EVENT_GAME_MANAGER();
     public static event EVENT_GAME_MANAGER OnLevelFail;
     public static event EVENT_GAME_MANAGER OnLevelWin;
-    public static event EVENT_GAME_MANAGER OnMoveRight;
-    public static event EVENT_GAME_MANAGER OnMoveLeft;
+    public static event EVENT_GAME_MANAGER OnPlayer1TakeDamage;
+    public static event EVENT_GAME_MANAGER OnPlayer2TakeDamage;
 
-    void Start () {
+    public static event EVENT_GAME_MANAGER OnBegin;
+
+    void Awake () {
         if (singleton == null)
         {
             singleton = this;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour {
             DestroyManager();
             return;
         }
+        GameState = "begin";
     }
 
     public void DestroyManager()
@@ -37,9 +40,21 @@ public class GameManager : MonoBehaviour {
         OnLevelFail();
     }
 
-    public void MoveRight()
+    public void Begin()
     {
-        OnMoveRight();
+        OnBegin();
+        GameState = "run";
+    }
+
+    public void TakeDamage(string playerName) {
+        Debug.Log("TAKEDAMAGE" + playerName);
+        if (playerName == "Player1") {
+            OnPlayer1TakeDamage();
+        }
+        if (playerName == "Player1")
+        {
+            OnPlayer2TakeDamage();
+        }
     }
 
 

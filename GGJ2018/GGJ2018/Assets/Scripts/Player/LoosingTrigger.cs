@@ -17,7 +17,6 @@ public class LoosingTrigger : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player1") {
-            Debug.Log("collision2. Pouet Pouet Pouet");
             GameManager.singleton.LevelFail();
         }
     }

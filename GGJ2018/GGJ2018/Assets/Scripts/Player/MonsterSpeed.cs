@@ -12,6 +12,8 @@ public class MonsterSpeed : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.transform.position += Vector3.forward * speed * Time.deltaTime;
+        if (GameManager.singleton.GameState == "run") {
+            gameObject.transform.position += Vector3.forward * speed * Time.deltaTime;
+        }
 	}
 }
