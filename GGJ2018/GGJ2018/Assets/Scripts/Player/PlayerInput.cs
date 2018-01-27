@@ -57,27 +57,29 @@ public class PlayerInput : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        ///////////////////////////////////////////////////////////
-        // Controller One is the player one (runner with action) //
-        ///////////////////////////////////////////////////////////
-        // Move Left action
         if (GamePad.GetButton(GamePad.Button.X, controllerIndex) ||
             GamePad.GetButton(GamePad.Button.LeftShoulder, controllerIndex) ||
             (Input.GetKey(KeyCode.LeftArrow) && controllerIndex == GamePad.Index.One) ||
-            (Input.GetKey(KeyCode.Q) && controllerIndex == GamePad.Index.Two))
+            (Input.GetKey(KeyCode.Q) && controllerIndex == GamePad.Index.Two) || Input.GetAxis("Horizontal"+controllerIndex) < 0)
         {
-
             position -= 1;
             float step = speed * Time.deltaTime;
             float newX = gameObject.transform.position.x - Move;
-            MoveLeft();
+            if (Input.GetAxis("Horizontal" + controllerIndex) == 0)
+            {
+                MoveLeft(speed);
+            }
+            else {
+
+            }
+            
         }
 
         // Move Right action
         else if (GamePad.GetButton(GamePad.Button.B, controllerIndex) ||
             GamePad.GetButton(GamePad.Button.RightShoulder, controllerIndex) ||
             (Input.GetKey(KeyCode.RightArrow) && controllerIndex == GamePad.Index.One) ||
-            (Input.GetKey(KeyCode.D) && controllerIndex == GamePad.Index.Two))
+            (Input.GetKey(KeyCode.D) && controllerIndex == GamePad.Index.Two) || Input.GetAxis("Horizontal"+controllerIndex) > 0)
         {
             MoveRight();
             
@@ -112,11 +114,11 @@ public class PlayerInput : MonoBehaviour {
 		}
 	}
 
-    public void MoveRight() {
+    public void MoveRight(float speed) {
         gameObject.transform.position += Vector3.right * speed * Time.deltaTime;
     }
 
-    public void MoveLeft()
+    public void MoveLeft(float speed)
     {
         gameObject.transform.position += Vector3.left * speed * Time.deltaTime;
     }

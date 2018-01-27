@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 	public static event EVENT_GAME_MANAGER OnPlayerInitObstacle;
 
     public static event EVENT_GAME_MANAGER OnBegin;
+    public static event EVENT_GAME_MANAGER OnBeforeBegin;
 
     void Start () {
         if (singleton == null)
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour {
             DestroyManager();
             return;
         }
-        GameState = "begin";
+        GameState = "beforeBegin";
     }
 
     public void DestroyManager()
@@ -46,6 +47,12 @@ public class GameManager : MonoBehaviour {
         OnBegin();
         GameState = "run";
     }
+    public void BeforeBegin()
+    {
+        OnBeforeBegin();
+        GameState = "begin";
+    }
+
 
     public void TakeDamage(string playerName) {
         if (playerName == "Player1") {
