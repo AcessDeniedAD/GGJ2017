@@ -35,17 +35,18 @@ public class AffectedByObstacle : MonoBehaviour {
         
     }
     IEnumerator GoBack() {
-        GameManager.singleton.TakeDamage(gameObject.name);
         float timer = 0;
         while (timer < timeToGoBack) {
             timer += Time.deltaTime;
             gameObject.transform.position += -Vector3.forward * (WorldManager.speed+1) * Time.deltaTime;
             yield return 0;
         }
+		Damage ();
 		yield return 0;
     }
 
     public void Damage() {
+		Debug.Log (gameObject.name);
 		if (gameObject.name == "Player2") {
 			PlayerStats player2 = gameObject.GetComponent<PlayerStats> ();
 			player2.Life -= 1;
