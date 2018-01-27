@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour {
 
-    public static float speed = 5;
+    public static float speed = 15;
     public List<Transform> floors;
     public int TotalFLoors;
     public Transform firstFloor;
@@ -24,7 +24,7 @@ public class WorldManager : MonoBehaviour {
     {
         if (GameManager.singleton.GameState == "run")
         {
-            speed += 0.01f;
+            speed += 0.001f;
             for (int i = 0; i < floors.Count; i++)
             {
                 floors[i].transform.position += -Vector3.forward * speed * Time.deltaTime;
@@ -45,8 +45,6 @@ public class WorldManager : MonoBehaviour {
     public void InitFloor() {
         int randomInt = Random.Range(1, TotalFLoors - 1);
         Transform lastFloor = floors[floors.Count - 1];
-        Debug.Log(randomInt);
-        Debug.Break();
         GameObject newFloor = Resources.Load("Floor" + randomInt) as GameObject;
         MeshRenderer lastFloorMesh = lastFloor.GetComponent<MeshRenderer>();
         Vector3 newPosition = lastFloor.transform.position + new Vector3(0, 0, lastFloorMesh.bounds.size.z);
