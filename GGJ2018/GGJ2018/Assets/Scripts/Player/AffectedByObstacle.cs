@@ -25,27 +25,28 @@ public class AffectedByObstacle : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Obstacle") {
+		if (other.tag == "Obstacle") {
+			StartCoroutine (GoBack ());
+		} else if (other.tag == "PlayerObstacle") {
 			Destroy (other.gameObject);
-            StartCoroutine(GoBack());
-        }
+			StartCoroutine (GoBack ());
+		}
         
     }
     IEnumerator GoBack() {
         GameManager.singleton.TakeDamage(gameObject.name);
-        yield return 0;
         float timer = 0;
         while (timer < timeToGoBack) {
             timer += Time.deltaTime;
-            gameObject.transform.position += -Vector3.forward * (WorldManager.speed/1.9f) * Time.deltaTime;
+            gameObject.transform.position += -Vector3.forward * (WorldManager.speed+1) * Time.deltaTime;
             yield return 0;
         }
+		yield return 0;
     }
 
     public void Damage() {
 		if (gameObject.name == "Player2") {
 			PlayerStats player2 = gameObject.GetComponent<PlayerStats> ();
-			Debug.Log (player2.Life);
 			player2.Life -= 1;
 			if (player2.Life <= 0){
 				GameManager.singleton.LevelFail();

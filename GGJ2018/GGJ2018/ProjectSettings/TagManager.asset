@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - LootBox
   - Floor
+  - PlayerObstacle
   layers:
   - Default
   - TransparentFX
