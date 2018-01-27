@@ -70,7 +70,7 @@ public class PlayerInput : MonoBehaviour {
                 MoveLeft(speed);
             }
             else {
-
+                MoveLeft(Input.GetAxis("Horizontal" + controllerIndex) * speed);
             }
             
         }
@@ -81,8 +81,15 @@ public class PlayerInput : MonoBehaviour {
             (Input.GetKey(KeyCode.RightArrow) && controllerIndex == GamePad.Index.One) ||
             (Input.GetKey(KeyCode.D) && controllerIndex == GamePad.Index.Two) || Input.GetAxis("Horizontal"+controllerIndex) > 0)
         {
-            MoveRight();
-            
+            if (Input.GetAxis("Horizontal" + controllerIndex) == 0)
+            {
+                MoveRight(speed);
+            }
+            else
+            {
+                MoveRight(Input.GetAxis("Horizontal" + controllerIndex) * speed);
+            }
+
         }
 
 
@@ -114,13 +121,13 @@ public class PlayerInput : MonoBehaviour {
 		}
 	}
 
-    public void MoveRight(float speed) {
-        gameObject.transform.position += Vector3.right * speed * Time.deltaTime;
+    public void MoveRight(float _speed) {
+        gameObject.transform.position += Vector3.right * _speed * Time.deltaTime;
     }
 
-    public void MoveLeft(float speed)
+    public void MoveLeft(float _speed)
     {
-        gameObject.transform.position += Vector3.left * speed * Time.deltaTime;
+        gameObject.transform.position += Vector3.left * _speed * Time.deltaTime;
     }
 
 }
