@@ -16,6 +16,8 @@ public class PlayerInput : MonoBehaviour {
 	private bool coroutineStarted;
 	private float[] listPosition = new float[3];
 	private Coroutine currentCoroutine;
+	private PlayerObstacleManager playerObstacleManager;
+	private GameObject currentObstacle;
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +36,9 @@ public class PlayerInput : MonoBehaviour {
 			listPosition[i] = _position; 
 			_position += Move;
 		}
-
+		playerObstacleManager = GameObject.Find ("PlayerObstacleManager").GetComponent<PlayerObstacleManager> ();
+		currentObstacle = playerObstacleManager.InitObject ();
+		GameManager.singleton.PlayerInitObstacle ();
 	}
 	
 	// Update is called once per frame
@@ -108,7 +112,9 @@ public class PlayerInput : MonoBehaviour {
 	}
 		
 	public void Action(){
-		Debug.Log("Action"+gameObject.name);
+		
+		playerObstacleManager.DropObject (currentObstacle, gameObject);
+
 	}
 
     public void LaunchCameraCoroutine(float axis, GameObject camera)

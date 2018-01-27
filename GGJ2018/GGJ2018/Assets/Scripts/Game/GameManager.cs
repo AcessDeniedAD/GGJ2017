@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public static event EVENT_GAME_MANAGER OnLevelWin;
     public static event EVENT_GAME_MANAGER OnPlayer1TakeDamage;
     public static event EVENT_GAME_MANAGER OnPlayer2TakeDamage;
+	public static event EVENT_GAME_MANAGER OnPlayerInitObstacle;
 
     public static event EVENT_GAME_MANAGER OnBegin;
 
@@ -55,4 +56,8 @@ public class GameManager : MonoBehaviour {
             OnPlayer2TakeDamage();
         }
     }
+
+	public void PlayerInitObstacle() {
+		OnPlayerInitObstacle ();
+	}
 }
