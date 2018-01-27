@@ -24,6 +24,7 @@ public class LooseCoroots : MonoBehaviour {
 
     IEnumerator LooseCoroutine() {
         WorldManager.speed = 5;
+        GameManager.singleton.GameState = "Begin";
         DontDestroyOnLoad(GameManager.singleton.gameObject);
         SceneManager.LoadScene("Level");
         yield return 0;
