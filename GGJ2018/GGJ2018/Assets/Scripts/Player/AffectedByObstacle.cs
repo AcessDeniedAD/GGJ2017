@@ -7,12 +7,15 @@ public class AffectedByObstacle : MonoBehaviour {
     public float timeToGoBack = 0.5f;
 	// Use this for initialization
 	void Start () {
-        GameManager.OnPlayer1TakeDamage += () => {
-            Damage();
-        };
-        GameManager.OnPlayer2TakeDamage += () => {
-            Damage();
-        };
+		if(gameObject.name == "Player1"){
+        	GameManager.OnPlayer1TakeDamage += () => {
+            	Damage();
+        	};
+		}else if(gameObject.name == "Player2"){
+	        GameManager.OnPlayer2TakeDamage += () => {
+	            Damage();
+	        };
+		}
     }
 	
 	// Update is called once per frame
@@ -40,6 +43,14 @@ public class AffectedByObstacle : MonoBehaviour {
     }
 
     public void Damage() {
-        Debug.Log("sdfdsfsdfsdfd");
+		if (gameObject.name == "Player2") {
+			PlayerStats player2 = gameObject.GetComponent<PlayerStats> ();
+			Debug.Log (player2.Life);
+			player2.Life -= 1;
+			if (player2.Life <= 0){
+				GameManager.singleton.LevelFail();
+			}
+		}
+
     }
 }
