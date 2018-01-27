@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     public delegate void EVENT_GAME_MANAGER();
     public static event EVENT_GAME_MANAGER OnLevelFail;
     public static event EVENT_GAME_MANAGER OnLevelWin;
+    public static event EVENT_GAME_MANAGER OnMoveRight;
+    public static event EVENT_GAME_MANAGER OnMoveLeft;
 
     void Start () {
         if (singleton == null)
@@ -34,4 +36,12 @@ public class GameManager : MonoBehaviour {
     {
         OnLevelFail();
     }
+
+    public void MoveRight()
+    {
+        OnMoveRight();
+    }
+
+
+
 }

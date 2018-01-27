@@ -23,6 +23,7 @@ public class LooseCoroots : MonoBehaviour {
     }
 
     IEnumerator LooseCoroutine() {
+        WorldManager.speed = 5;
         DontDestroyOnLoad(GameManager.singleton.gameObject);
         SceneManager.LoadScene("Level");
         yield return 0;

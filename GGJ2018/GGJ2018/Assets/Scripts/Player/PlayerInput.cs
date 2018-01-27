@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour {
 	public float Move;
 	public float speed;
 
+    public GameObject CameraWhoFollow;
 	private GamePad.Index controllerIndex;
 	private int position = 1;
 	private float step;
@@ -20,9 +21,11 @@ public class PlayerInput : MonoBehaviour {
 	void Start () {
 		float _position = 0f;
 		if (playerId == 1) {
+            CameraWhoFollow = GameObject.Find("Main Camera");
 			controllerIndex = GamePad.Index.One;
 		} else {
-			controllerIndex = GamePad.Index.Two;
+            CameraWhoFollow = GameObject.Find("Main Camera2");
+            controllerIndex = GamePad.Index.Two;
 		}
 
 		_position =  gameObject.transform.position.x -  Move;
@@ -50,14 +53,14 @@ public class PlayerInput : MonoBehaviour {
 					StopCoroutine (currentCoroutine);
 					coroutineStarted = false;
 				}
-				position -= 1;
+                position -= 1;
 				float step = speed * Time.deltaTime;
 				float newX = gameObject.transform.position.x - Move;
 				currentCoroutine = StartCoroutine (MoveCoroutine (step));
-				//StartCoroutine (MoveCoroutine (NewPosition, step));
+                LaunchCameraCoroutine(1, CameraWhoFollow);
 
 
-			}
+            }
 		}
 
 		// Move Right action
@@ -72,12 +75,15 @@ public class PlayerInput : MonoBehaviour {
 					StopCoroutine (currentCoroutine);
 					coroutineStarted = false;
 				}
-				position += 1;
+                
+                position += 1;
 				float step = speed * Time.deltaTime;
 				float newX = gameObject.transform.position.x + Move;
-				currentCoroutine = StartCoroutine (MoveCoroutine (step));
+                currentCoroutine = StartCoroutine (MoveCoroutine (step));
+                LaunchCameraCoroutine(-1,CameraWhoFollow);
 
-			}
+
+            }
 		}
 
 		// Action
@@ -89,12 +95,10 @@ public class PlayerInput : MonoBehaviour {
 	}
 
 	IEnumerator MoveCoroutine(float step){
-		//Debug.Log("Before While");
 		coroutineStarted = true;
         Vector3 NewPosition = new Vector3(listPosition[position], gameObject.transform.position.y, gameObject.transform.position.z);
         while (gameObject.transform.position.x != NewPosition.x || !coroutineStarted){
             NewPosition = new Vector3(listPosition[position], gameObject.transform.position.y, gameObject.transform.position.z);
-            //Debug.Log("In While " +NewPosition + " "+ step+ " " + gameObject.transform.position );
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, NewPosition, step);
 			yield return 0;
 		}
@@ -106,4 +110,36 @@ public class PlayerInput : MonoBehaviour {
 	public void Action(){
 		Debug.Log("Action"+gameObject.name);
 	}
+
+    public void LaunchCameraCoroutine(float axis, GameObject camera)
+    {
+        StartCoroutine(MoveCamera(axis, camera));
+    }
+
+    IEnumerator MoveCamera(float axis, GameObject camera)
+    {
+        float timer = 0;
+
+        while (timer < 0.1f)
+        {
+            camera.transform.RotateAround(Vector3.forward, axis * 2 * Time.deltaTime/5);
+            timer += Time.deltaTime;
+            yield return 0;
+        }
+        timer = 0;
+        while (timer < 0.1f)
+        {
+            camera.transform.RotateAround(Vector3.forward, axis * -2 * Time.deltaTime/5);
+            timer += Time.deltaTime;
+            yield return 0;
+        }
+        while (transform.rotation != Quaternion.Euler(0, 0, 0))
+        {
+            camera.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), 2 * Time.deltaTime);
+            timer += Time.deltaTime;
+            yield return 0;
+        }
+
+    }
+
 }
