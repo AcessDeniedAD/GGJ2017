@@ -29,12 +29,12 @@ public class TimerBegin : MonoBehaviour {
                 GameManager.singleton.Begin();
                 timer = 0;
             }
-            
-            
         }
 
 	}
 
     public void IsStart() {
+        timer = 0;
+        GameManager.singleton.GameState = "run";
     }
 }

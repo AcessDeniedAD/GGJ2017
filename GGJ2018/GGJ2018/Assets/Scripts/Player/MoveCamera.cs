@@ -39,7 +39,6 @@ public class MoveCamera : MonoBehaviour {
             timer += Time.deltaTime;
             yield return 0;
         }
-
     }
 
 

@@ -15,7 +15,6 @@ public class LooseCoroots : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 
     public void LaunchLooseCoroots() {
@@ -24,7 +23,7 @@ public class LooseCoroots : MonoBehaviour {
 
     IEnumerator LooseCoroutine() {
         WorldManager.speed = 5;
-        GameManager.singleton.GameState = "Begin";
+        GameManager.singleton.GameState = "begin";
         DontDestroyOnLoad(GameManager.singleton.gameObject);
         SceneManager.LoadScene("Level");
         yield return 0;

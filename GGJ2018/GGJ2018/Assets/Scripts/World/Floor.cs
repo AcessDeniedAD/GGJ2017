@@ -15,11 +15,10 @@ public class Floor : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision other)
 	{
-		Debug.Log(other.gameObject.tag);
 		if (other.gameObject.tag == "Obstacle") {
 			Debug.Log("Hello2");
 			other.transform.parent = gameObject.transform;
 		}
-
+            
 	}
 }

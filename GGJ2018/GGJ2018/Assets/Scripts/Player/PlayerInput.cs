@@ -19,8 +19,9 @@ public class PlayerInput : MonoBehaviour {
 	private PlayerObstacleManager playerObstacleManager;
 	private GameObject currentObstacle;
 	private bool HasAnObstacle;
+    private Quaternion cameraInitialRotation;
 
-
+    
 	// Use this for initialization
 	void Start () {
 		float _position = 0f;
@@ -38,6 +39,7 @@ public class PlayerInput : MonoBehaviour {
 			listPosition[i] = _position; 
 			_position += Move;
 		}
+        cameraInitialRotation = CameraWhoFollow.transform.rotation;
 
 	}
 
@@ -54,38 +56,31 @@ public class PlayerInput : MonoBehaviour {
 		
 	// Update is called once per frame
 	void FixedUpdate () {
-		///////////////////////////////////////////////////////////
-		// Controller One is the player one (runner with action) //
-		///////////////////////////////////////////////////////////
-		// Move Left action
-		if (GamePad.GetButton(GamePad.Button.X, controllerIndex) ||
-			GamePad.GetButton(GamePad.Button.LeftShoulder, controllerIndex) ||
-			(Input.GetKey(KeyCode.LeftArrow) && controllerIndex == GamePad.Index.One) ||
-			(Input.GetKey(KeyCode.D) && controllerIndex == GamePad.Index.Two)) 
-		{
+        ///////////////////////////////////////////////////////////
+        // Controller One is the player one (runner with action) //
+        ///////////////////////////////////////////////////////////
+        // Move Left action
+        if (GamePad.GetButton(GamePad.Button.X, controllerIndex) ||
+            GamePad.GetButton(GamePad.Button.LeftShoulder, controllerIndex) ||
+            (Input.GetKey(KeyCode.LeftArrow) && controllerIndex == GamePad.Index.One) ||
+            (Input.GetKey(KeyCode.D) && controllerIndex == GamePad.Index.Two))
+        {
 
-                position -= 1;
-				float step = speed * Time.deltaTime;
-				float newX = gameObject.transform.position.x - Move;
-				//currentCoroutine = StartCoroutine (MoveCoroutine (step));
-                LaunchCameraCoroutine(1, CameraWhoFollow);
-                MoveLeft();
+            position -= 1;
+            float step = speed * Time.deltaTime;
+            float newX = gameObject.transform.position.x - Move;
+            MoveLeft();
+        }
 
-
+        // Move Right action
+        else if (GamePad.GetButton(GamePad.Button.B, controllerIndex) ||
+            GamePad.GetButton(GamePad.Button.RightShoulder, controllerIndex) ||
+            (Input.GetKey(KeyCode.RightArrow) && controllerIndex == GamePad.Index.One) ||
+            (Input.GetKey(KeyCode.Q) && controllerIndex == GamePad.Index.Two))
+        {
+            MoveRight();
             
-		}
-
-		// Move Right action
-		else if (GamePad.GetButton(GamePad.Button.B, controllerIndex) ||
-            GamePad.GetButton(GamePad.Button.RightShoulder, controllerIndex) || 
-			(Input.GetKey(KeyCode.RightArrow) && controllerIndex == GamePad.Index.One) ||
-			(Input.GetKey(KeyCode.Q) && controllerIndex == GamePad.Index.Two)) 
-		{
-                //currentCoroutine = StartCoroutine (MoveCoroutine (step));
-                MoveRight();
-                LaunchCameraCoroutine(-1,CameraWhoFollow);
-       
-		}
+        }
 
 		// Action
 		if (GamePad.GetButtonDown(GamePad.Button.A, controllerIndex) || 
@@ -114,39 +109,6 @@ public class PlayerInput : MonoBehaviour {
 			HasAnObstacle = false;
 		}
 	}
-
-    public void LaunchCameraCoroutine(float axis, GameObject camera)
-    {
-        StartCoroutine(MoveCamera(axis, camera));
-    }
-
-    IEnumerator MoveCamera(float axis, GameObject camera)
-    {
-        float timer = 0;
-
-        while (timer < 0.1f)
-        {
-            camera.transform.RotateAround(Vector3.forward, axis * 0.5f * Time.deltaTime/5);
-            timer += Time.deltaTime;
-            yield return 0;
-        }
-
-        timer = 0;
-        while (timer < 0.1f)
-        {
-            camera.transform.RotateAround(Vector3.forward, axis * -0.5f * Time.deltaTime/5);
-            timer += Time.deltaTime;
-            yield return 0;
-        }
-
-        while (transform.rotation != Quaternion.Euler(0, 0, 0))
-        {
-            camera.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), 0.5f * Time.deltaTime);
-            timer += Time.deltaTime;
-            yield return 0;
-        }
-
-    }
 
     public void MoveRight() {
         gameObject.transform.position += Vector3.right * speed * Time.deltaTime;

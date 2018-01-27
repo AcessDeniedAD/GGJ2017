@@ -40,6 +40,5 @@ public class AffectedByObstacle : MonoBehaviour {
     }
 
     public void Damage() {
-        Debug.Log("sdfdsfsdfsdfd");
     }
 }

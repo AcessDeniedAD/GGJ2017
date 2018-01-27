@@ -18,7 +18,10 @@ public class WorldManager : MonoBehaviour {
         }
         firstFloor = floors[0];
         InitFirstFloors();
-	}
+        GameManager.OnLevelFail += () => {
+            OnLoose();
+        };
+    }
 
     private void Update()
     {
@@ -72,11 +75,17 @@ public class WorldManager : MonoBehaviour {
 
     IEnumerator PlaceFloor(GameObject floor, float s) {
         yield return new WaitForSeconds(s);
-        while (floor.transform.position.x != firstFloor.transform.position.x)
-        {
-            floor.transform.position = new Vector3( Mathf.Lerp(floor.transform.position.x,firstFloor.transform.position.x, 3* Time.deltaTime),floor.transform.position.y, floor.transform.position.z);
-            yield return 0;
+        if (floor != null) {
+            while (floor.transform.position.x != firstFloor.transform.position.x)
+            {
+                floor.transform.position = new Vector3(Mathf.Lerp(floor.transform.position.x, firstFloor.transform.position.x, 3 * Time.deltaTime), floor.transform.position.y, floor.transform.position.z);
+                yield return 0;
+            }
         }
+    }
 
+    public void OnLoose()
+    {
+        floors.Clear();
     }
 }

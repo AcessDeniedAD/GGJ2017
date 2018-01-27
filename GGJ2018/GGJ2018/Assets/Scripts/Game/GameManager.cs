@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 
     public static event EVENT_GAME_MANAGER OnBegin;
 
-    void Awake () {
+    void Start () {
         if (singleton == null)
         {
             singleton = this;
