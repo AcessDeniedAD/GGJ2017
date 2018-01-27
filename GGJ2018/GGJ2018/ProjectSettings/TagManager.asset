@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - MainCamera2
+  - Player1
   layers:
   - Default
   - TransparentFX
