@@ -56,6 +56,7 @@ public class PlayerInput : MonoBehaviour {
 		
 	// Update is called once per frame
 	void FixedUpdate () {
+
         ///////////////////////////////////////////////////////////
         // Controller One is the player one (runner with action) //
         ///////////////////////////////////////////////////////////
@@ -81,6 +82,7 @@ public class PlayerInput : MonoBehaviour {
             MoveRight();
             
         }
+
 
 		// Action
 		if (GamePad.GetButtonDown(GamePad.Button.A, controllerIndex) || 

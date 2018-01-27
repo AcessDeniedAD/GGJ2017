@@ -7,6 +7,9 @@ TagManager:
   - Player1
   - MainCamera2
   - Obstacle
+  - LootBox
+  - Floor
+  - PlayerObstacle
   layers:
   - Default
   - TransparentFX

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65964883997426108}
   - component: {fileID: 23620267409559616}
   m_Layer: 0
-  m_Name: Props (1)
+  m_Name: Floor5Prop1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 65095462946323962}
   - component: {fileID: 23448522966928070}
   m_Layer: 0
-  m_Name: Props (3)
+  m_Name: Floor5Prop2
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

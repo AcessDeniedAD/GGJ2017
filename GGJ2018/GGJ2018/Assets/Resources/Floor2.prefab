@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65856141540164642}
   - component: {fileID: 23808617118000950}
   m_Layer: 0
-  m_Name: Props (1)
+  m_Name: Floor2Prop3
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 65700432125215716}
   - component: {fileID: 23533674309843728}
   m_Layer: 0
-  m_Name: Props
+  m_Name: Floor1Prop1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 65129389977130252}
   - component: {fileID: 23480138272819352}
   m_Layer: 0
-  m_Name: Props (4)
+  m_Name: Floor2Prop2
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,7 +321,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1454634081166212}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -333,7 +333,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1247293855022108}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

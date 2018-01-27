@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
         if (playerName == "Player1") {
             OnPlayer1TakeDamage();
         }
-        if (playerName == "Player1")
+        if (playerName == "Player2")
         {
             OnPlayer2TakeDamage();
         }
