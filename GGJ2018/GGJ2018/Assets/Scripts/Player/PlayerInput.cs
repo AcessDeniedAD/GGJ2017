@@ -64,7 +64,7 @@ public class PlayerInput : MonoBehaviour {
         if (GamePad.GetButton(GamePad.Button.X, controllerIndex) ||
             GamePad.GetButton(GamePad.Button.LeftShoulder, controllerIndex) ||
             (Input.GetKey(KeyCode.LeftArrow) && controllerIndex == GamePad.Index.One) ||
-            (Input.GetKey(KeyCode.D) && controllerIndex == GamePad.Index.Two))
+            (Input.GetKey(KeyCode.Q) && controllerIndex == GamePad.Index.Two))
         {
 
             position -= 1;
@@ -77,7 +77,7 @@ public class PlayerInput : MonoBehaviour {
         else if (GamePad.GetButton(GamePad.Button.B, controllerIndex) ||
             GamePad.GetButton(GamePad.Button.RightShoulder, controllerIndex) ||
             (Input.GetKey(KeyCode.RightArrow) && controllerIndex == GamePad.Index.One) ||
-            (Input.GetKey(KeyCode.Q) && controllerIndex == GamePad.Index.Two))
+            (Input.GetKey(KeyCode.D) && controllerIndex == GamePad.Index.Two))
         {
             MoveRight();
             
