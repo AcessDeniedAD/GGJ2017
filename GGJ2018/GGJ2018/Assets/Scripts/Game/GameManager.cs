@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour {
     }
 
     public void TakeDamage(string playerName) {
-        Debug.Log("TAKEDAMAGE" + playerName);
         if (playerName == "Player1") {
             OnPlayer1TakeDamage();
         }
@@ -56,7 +55,4 @@ public class GameManager : MonoBehaviour {
             OnPlayer2TakeDamage();
         }
     }
-
-
-
 }
