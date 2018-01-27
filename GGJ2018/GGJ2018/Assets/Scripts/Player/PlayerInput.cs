@@ -18,6 +18,8 @@ public class PlayerInput : MonoBehaviour {
 	private Coroutine currentCoroutine;
 	private PlayerObstacleManager playerObstacleManager;
 	private GameObject currentObstacle;
+	private bool HasAnObstacle;
+
 
 	// Use this for initialization
 	void Start () {
@@ -36,11 +38,19 @@ public class PlayerInput : MonoBehaviour {
 			listPosition[i] = _position; 
 			_position += Move;
 		}
-		playerObstacleManager = GameObject.Find ("PlayerObstacleManager").GetComponent<PlayerObstacleManager> ();
-		currentObstacle = playerObstacleManager.InitObject ();
-		GameManager.singleton.PlayerInitObstacle ();
+
 	}
-	
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "LootBox" && !HasAnObstacle) {
+			playerObstacleManager = GameObject.Find ("PlayerObstacleManager").GetComponent<PlayerObstacleManager> ();
+			currentObstacle = playerObstacleManager.InitObject ();
+			GameManager.singleton.PlayerInitObstacle ();
+			HasAnObstacle = true;
+		}
+
+	}
 	// Update is called once per frame
 	void Update () {
 		///////////////////////////////////////////////////////////
@@ -112,8 +122,10 @@ public class PlayerInput : MonoBehaviour {
 	}
 		
 	public void Action(){
-		
-		playerObstacleManager.DropObject (currentObstacle, gameObject);
+		if (HasAnObstacle) {
+			playerObstacleManager.DropObject (currentObstacle, gameObject);
+			HasAnObstacle = false;
+		}
 
 	}
 

@@ -36,6 +36,5 @@ public class TimerBegin : MonoBehaviour {
 	}
 
     public void IsStart() {
-        Debug.Log("IS RUNNING");
     }
 }

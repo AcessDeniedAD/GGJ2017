@@ -15,8 +15,9 @@ public class Floor : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision other)
 	{
-		if (other.rigidbody.tag == "Obstacle") {
-			Debug.Log ("HEllo2");
+		Debug.Log(other.gameObject.tag);
+		if (other.gameObject.tag == "Obstacle") {
+			Debug.Log("Hello2");
 			other.transform.parent = gameObject.transform;
 		}
 

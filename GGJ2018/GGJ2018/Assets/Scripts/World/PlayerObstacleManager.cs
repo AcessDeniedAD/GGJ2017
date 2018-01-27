@@ -31,7 +31,6 @@ public class PlayerObstacleManager : MonoBehaviour {
 	public void DropObject(GameObject obstacle, GameObject player){
 		Vector3 newPosition = player.transform.position - new Vector3(0.0f, 0.0f, (player.transform.localScale.z*10f));
 		GameObject newObstacleInstantiate = Instantiate(obstacle, newPosition,Quaternion.identity) as GameObject;
-
 	}
 
 	public void IsInit(){

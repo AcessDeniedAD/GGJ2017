@@ -34,7 +34,6 @@ public class WorldManager : MonoBehaviour {
                     Transform lastFloor = floors[floors.Count - 1];
                     Destroy(actualFloor.gameObject);
                     floors.Remove(actualFloor);
-                    Debug.Log(floors.Count);
                     GameObject newFloor = Resources.Load("Floor") as GameObject;
                     MeshRenderer lastFloorMesh = lastFloor.GetComponent<MeshRenderer>();
                     Vector3 newPosition = lastFloor.transform.position + new Vector3(0, 0, lastFloorMesh.bounds.size.z);

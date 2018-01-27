@@ -23,6 +23,7 @@ public class AffectedByObstacle : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Obstacle") {
+			Destroy (other.gameObject);
             StartCoroutine(GoBack());
         }
         
