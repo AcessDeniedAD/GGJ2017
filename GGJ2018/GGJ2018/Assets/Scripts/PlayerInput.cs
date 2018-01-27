@@ -7,21 +7,30 @@ public class PlayerInput : MonoBehaviour {
 
 	public int playerId ;
 	public float Move;
-	private GamePad.Index controllerIndex;
-	private int position = 0;
-
 	public float speed;
+
+	private GamePad.Index controllerIndex;
+	private int position = 1;
 	private float step;
 	private bool coroutineStarted;
+	private float[] listPosition = new float[3];
+	private Coroutine currentCoroutine;
 
 	// Use this for initialization
 	void Start () {
+		float _position = 0f;
 		if (playerId == 1) {
 			controllerIndex = GamePad.Index.One;
 		} else {
 			controllerIndex = GamePad.Index.Two;
 		}
 
+		_position =  gameObject.transform.position.x -  Move;
+		for (int i = 0; i <= 2; i++)
+		{
+			listPosition[i] = _position; 
+			_position += Move;
+		}
 
 	}
 	
@@ -36,12 +45,19 @@ public class PlayerInput : MonoBehaviour {
 			(Input.GetKeyDown(KeyCode.LeftArrow) && controllerIndex == GamePad.Index.One) ||
 			(Input.GetKeyDown(KeyCode.D) && controllerIndex == GamePad.Index.Two)) 
 		{
-			if (position > -1 && coroutineStarted == false) {
+			if (position > 0) {
+				if (coroutineStarted) {
+					StopCoroutine (currentCoroutine);
+					coroutineStarted = false;
+				}
+				position -= 1;
 				float step = speed * Time.deltaTime;
 				float newX = gameObject.transform.position.x - Move;
-				Vector3 NewPosition = new Vector3 (newX, gameObject.transform.position.y, gameObject.transform.position.z);
-				StartCoroutine (MoveCoroutine (NewPosition, step));
-				position -= 1;
+				Vector3 NewPosition = new Vector3 (listPosition[position], gameObject.transform.position.y, gameObject.transform.position.z);
+				currentCoroutine = StartCoroutine (MoveCoroutine (NewPosition, step));
+				//StartCoroutine (MoveCoroutine (NewPosition, step));
+
+
 			}
 		}
 
@@ -50,12 +66,18 @@ public class PlayerInput : MonoBehaviour {
 			(Input.GetKeyDown(KeyCode.RightArrow) && controllerIndex == GamePad.Index.One) ||
 			(Input.GetKeyDown(KeyCode.Q) && controllerIndex == GamePad.Index.Two)) 
 		{
-			if (position < 1 && coroutineStarted == false) {
+			StopCoroutine ("MoveCoroutine");
+			if (position < 2) {
+				if (coroutineStarted) {;
+					StopCoroutine (currentCoroutine);
+					coroutineStarted = false;
+				}
+				position += 1;
 				float step = speed * Time.deltaTime;
 				float newX = gameObject.transform.position.x + Move;
-				Vector3 NewPosition = new Vector3 (newX, gameObject.transform.position.y, gameObject.transform.position.z);
-				StartCoroutine (MoveCoroutine (NewPosition, step));
-				position += 1;
+				Vector3 NewPosition = new Vector3 (listPosition[position], gameObject.transform.position.y, gameObject.transform.position.z);
+				currentCoroutine = StartCoroutine (MoveCoroutine (NewPosition, step));
+
 			}
 		}
 
@@ -70,7 +92,8 @@ public class PlayerInput : MonoBehaviour {
 	IEnumerator MoveCoroutine(Vector3 NewPosition, float step){
 		//Debug.Log("Before While");
 		coroutineStarted = true;
-		while (gameObject.transform.position != NewPosition){
+
+		while (gameObject.transform.position != NewPosition || !coroutineStarted){
 			//Debug.Log("In While " +NewPosition + " "+ step+ " " + gameObject.transform.position );
 			gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, NewPosition, step);
 			yield return 0;
