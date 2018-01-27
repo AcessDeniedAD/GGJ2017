@@ -31,9 +31,8 @@ public class WorldManager : MonoBehaviour {
             for (int i = 0; i < floors.Count; i++)
             {
                 floors[i].transform.position += -Vector3.forward * speed * Time.deltaTime;
-                if (floors[i].transform.position.z < -400)
+                if (floors[i].transform.position.z < -1000)
                 {
-                    
                     Transform actualFloor = floors[i];
                     Destroy(actualFloor.gameObject);
                     floors.Remove(actualFloor);
@@ -58,7 +57,7 @@ public class WorldManager : MonoBehaviour {
     }
 
     public void InitFirstFloors() {
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 35; i++) {
             InitFloor();
             if (i != 0) {
                 int rand = Random.Range(0, 3);
@@ -68,7 +67,7 @@ public class WorldManager : MonoBehaviour {
                 }
                 else { rand = 2; }
                 floors[i].transform.position += new Vector3(rand * 100,0,0);
-                StartCoroutine(PlaceFloor(floors[i].gameObject, i * 0.2f +1.5f));
+                StartCoroutine(PlaceFloor(floors[i].gameObject, i * 0.1f +1.5f));
             }
         }
     }

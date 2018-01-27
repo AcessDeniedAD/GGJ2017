@@ -121,13 +121,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 144944601}
-  - component: {fileID: 144944600}
   - component: {fileID: 144944602}
   - component: {fileID: 144944603}
   - component: {fileID: 144944604}
   - component: {fileID: 144944605}
   - component: {fileID: 144944606}
   - component: {fileID: 144944607}
+  - component: {fileID: 144944608}
+  - component: {fileID: 144944600}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -143,9 +144,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 144944599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08cc201f5115e304698b88c588f22574, type: 3}
+  m_Script: {fileID: 11500000, guid: af631489a69a19548831f4d4868c00b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floor: anyFloor
 --- !u!4 &144944601
 Transform:
   m_ObjectHideFlags: 0
@@ -157,6 +159,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 254179572}
+  - {fileID: 658323078}
+  - {fileID: 320447743}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -237,6 +241,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToGoBack: 1
+--- !u!114 &144944608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 144944599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0485d6826ff734879a5b10ff6662f65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Life: 1000
 --- !u!1 &254179571
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +518,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &320447742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 320447743}
+  m_Layer: 0
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &320447743
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 320447742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.39, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 144944601}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &351409057
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,7 +794,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 653878833}
   m_LocalRotation: {x: 0.20759809, y: 0.0033480914, z: 0.0012978241, w: 0.97820765}
-  m_LocalPosition: {x: 0, y: 4.45, z: -4.69}
+  m_LocalPosition: {x: -0.01, y: 3, z: -6.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 275341052}
@@ -768,10 +812,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 351409058}
-  damping: 0.64
-  lookAheadFactor: -12.29
-  lookAheadReturnSpeed: -6.02
-  lookAheadMoveThreshold: 40.81
+  damping: 0.21
+  lookAheadFactor: 0.22
+  lookAheadReturnSpeed: 1.2
+  lookAheadMoveThreshold: 4.4
 --- !u!1 &658323077
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,11 +841,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 658323077}
   m_LocalRotation: {x: 0.30174318, y: -0, z: -0, w: 0.9533893}
-  m_LocalPosition: {x: 0, y: 3.67, z: -21.72}
+  m_LocalPosition: {x: 0, y: 4.52, z: -6.0299997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 144944601}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 35.125, y: 0, z: 0}
 --- !u!114 &658323079
 MonoBehaviour:
@@ -811,16 +855,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 658323077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9dfad760b6e9455593192a6d869f7ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d8238cc53530b64fbb7828c3d3bb591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: Player2
-  xMargin: 0
-  yMargin: 50.43
-  xSmooth: 1000
-  ySmooth: 66.24
-  maxXAndY: {x: 3.26, y: 71.99}
-  minXAndY: {x: 0, y: 2.87}
+  target: {fileID: 320447743}
+  damping: 0.21
+  lookAheadFactor: 0.22
+  lookAheadReturnSpeed: 1.2
+  lookAheadMoveThreshold: 4.4
 --- !u!124 &658323080
 Behaviour:
   m_ObjectHideFlags: 0
