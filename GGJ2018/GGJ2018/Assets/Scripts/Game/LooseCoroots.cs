@@ -32,11 +32,15 @@ public class LooseCoroots : MonoBehaviour {
 		string playerName = GameManager.singleton.playerWinner;
 		Text text = GameObject.Find ("TextWinner").GetComponent<Text>();
 		text.text = "The winner is "+playerName;
+		Text buttonText = GameObject.Find ("Button").GetComponent<Text>();
+		Image buttonImage = GameObject.Find ("ButtonImage").GetComponent<Image>();
 		while (timer < 3 )
 		{
 			timer += Time.deltaTime;
 			blackImage.color += new Color32(0, 0, 0, 7);
 			text.color += new Color32(0, 0, 0, 2);
+			buttonImage.color += new Color32(0, 0, 0, 2);
+			buttonText.color += new Color32(0, 0, 0, 2);
 
 			yield return 0; 
 		}
