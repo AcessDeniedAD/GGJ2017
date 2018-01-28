@@ -13,8 +13,6 @@ public class LooseCoroots : MonoBehaviour {
         GameManager.OnLevelFail += () => {
             LaunchLooseCoroots();
         };
-		Clock clock = GameObject.Find("CLock").GetComponent<Clock> ();
-		blackImage = clock.blackImage;
     }
 	
 	// Update is called once per frame
@@ -29,7 +27,8 @@ public class LooseCoroots : MonoBehaviour {
         WorldManager.speed = 5;
         GameManager.singleton.GameState = "beforeBegin";
 		float timer = 0;
-
+		Clock clock = GameObject.Find("CLock").GetComponent<Clock> ();
+		blackImage = clock.blackImage;
 		string playerName = GameManager.singleton.playerWinner;
 		Text text = GameObject.Find ("TextWinner").GetComponent<Text>();
 		text.text = "The winner is "+playerName;
@@ -47,9 +46,5 @@ public class LooseCoroots : MonoBehaviour {
 
 
 		yield return 0;
-
-        //DontDestroyOnLoad(GameManager.singleton.gameObject);
-        //SceneManager.LoadScene("Level");
-        //StopAllCoroutines();
     }
 }
