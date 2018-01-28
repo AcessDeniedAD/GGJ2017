@@ -12,6 +12,7 @@ public class LoosingTrigger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(playerOne.transform.position.z <= gameObject.transform.position.z){
+			GameManager.singleton.playerWinner = "Player2";
 			GameManager.singleton.LevelFail();
 		}
 	}
@@ -19,7 +20,9 @@ public class LoosingTrigger : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player1") {
+			GameManager.singleton.playerWinner = "Player2";
             GameManager.singleton.LevelFail();
+
         }
     }
 }

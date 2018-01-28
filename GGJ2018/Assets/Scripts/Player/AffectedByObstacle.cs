@@ -51,6 +51,7 @@ public class AffectedByObstacle : MonoBehaviour {
 			PlayerStats player2 = gameObject.GetComponent<PlayerStats> ();
 			player2.Life -= 1;
 			if (player2.Life <= 0){
+				GameManager.singleton.playerWinner = "Player1";
 				GameManager.singleton.LevelFail();
 			}
 		}
