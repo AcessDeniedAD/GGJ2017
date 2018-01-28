@@ -35,7 +35,6 @@ public class Clock : MonoBehaviour {
 			timer += Time.deltaTime;
             if (timer <= timeToStart)
             {
-                Debug.Log("While");
                 gameObject.transform.Rotate(new Vector3(gameObject.transform.rotation.x, gameObject.transform.rotation.y, -(timeToStart * Time.deltaTime * 40)));
                 WorldManager.speed = initialWorldSpeed;
                 timer = 0;

@@ -46,12 +46,13 @@ public class AffectedByObstacle : MonoBehaviour {
     }
 
     public void Damage() {
-		Debug.Log (gameObject.name);
 		if (gameObject.name == "Player2") {
 			PlayerStats player2 = gameObject.GetComponent<PlayerStats> ();
 			player2.Life -= 1;
 			if (player2.Life <= 0){
 				GameManager.singleton.LevelFail();
+				GameObject player1 = GameObject.Find("Player1");
+				GameManager.singleton.playerWinner = player1;
 			}
 		}
     }

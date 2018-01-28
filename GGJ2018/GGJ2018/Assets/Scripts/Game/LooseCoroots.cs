@@ -36,6 +36,7 @@ public class LooseCoroots : MonoBehaviour {
 			yield return 0; 
 		}
 		string playerName = GameManager.singleton.playerWinner.name;
+		Debug.Log (playerName);
 		yield return 0;
 
         //DontDestroyOnLoad(GameManager.singleton.gameObject);
