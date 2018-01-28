@@ -13,6 +13,7 @@ public class LoosingTrigger : MonoBehaviour {
 	void Update () {
 		if(playerOne.transform.position.z <= gameObject.transform.position.z){
 			GameManager.singleton.LevelFail();
+			GameManager.singleton.playerWinner = gameObject;
 		}
 	}
 
@@ -20,6 +21,7 @@ public class LoosingTrigger : MonoBehaviour {
     {
         if (other.name == "Player1") {
             GameManager.singleton.LevelFail();
+			GameManager.singleton.playerWinner = gameObject;
         }
     }
 }
