@@ -29,14 +29,23 @@ public class LooseCoroots : MonoBehaviour {
         WorldManager.speed = 5;
         GameManager.singleton.GameState = "beforeBegin";
 		float timer = 0;
+
+		string playerName = GameManager.singleton.playerWinner;
+		Text text = GameObject.Find ("TextWinner").GetComponent<Text>();
+		text.text = "The winner is "+playerName;
 		while (timer < 3 )
 		{
 			timer += Time.deltaTime;
 			blackImage.color += new Color32(0, 0, 0, 7);
+			text.color += new Color32(0, 0, 0, 2);
+
 			yield return 0; 
 		}
-		string playerName = GameManager.singleton.playerWinner.name;
-		Debug.Log (playerName);
+
+
+
+
+
 		yield return 0;
 
         //DontDestroyOnLoad(GameManager.singleton.gameObject);

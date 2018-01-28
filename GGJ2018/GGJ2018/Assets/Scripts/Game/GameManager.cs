@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager singleton;
     public string GameState = "begin";
-	public GameObject playerWinner;
+	public string playerWinner;
     public delegate void EVENT_GAME_MANAGER();
     public static event EVENT_GAME_MANAGER OnLevelFail;
     public static event EVENT_GAME_MANAGER OnLevelWin;
